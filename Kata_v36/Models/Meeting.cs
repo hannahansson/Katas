@@ -7,6 +7,7 @@ namespace Scheduler.Models
         public DateTime Start;
         public TimeSpan Duration;
         public Applicant Applicant;
+        private DateTime _end;
 
         public Meeting(DateTime start)
         {
@@ -33,10 +34,15 @@ namespace Scheduler.Models
         {
             string date = Start.ToString("d'/'M'/'yy");
 
-            string info = date;
+            string timeOfDay = Start.ToString(format: " H:mm");
+            _end = Start + Duration;
+            string timeEnd = _end.ToString(format: " H:mm");
+
+            string info = date + " " + timeOfDay + " - " + timeEnd;
+
 
             if (Applicant != null)
-                info += " with: " + Applicant.Name;
+                info +=  " with: " +  Applicant.Name;
 
             return info;
         }
