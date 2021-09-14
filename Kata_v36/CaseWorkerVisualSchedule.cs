@@ -15,9 +15,11 @@ namespace Scheduler
     public partial class CaseWorkerVisualSchedule : UserControl
     {
         private readonly CaseWorker _caseWorker;
+        private Action _meetingAddedHandler;
 
-        public CaseWorkerVisualSchedule(CaseWorker caseWorker)
+        public CaseWorkerVisualSchedule(CaseWorker caseWorker, Action meetingAddedHandler)
         {
+            _meetingAddedHandler = meetingAddedHandler;
             _caseWorker = caseWorker;
             InitializeComponent();
 
@@ -52,6 +54,7 @@ namespace Scheduler
             try
             {
              _caseWorker.NewDateAdded(dateTimePicker.Value);
+             _meetingAddedHandler();
             RefreshDisplayedMeetings();
             }
             catch (MeetingOverlapException exception)

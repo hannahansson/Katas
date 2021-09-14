@@ -25,6 +25,9 @@ namespace Scheduler.Models
                 applicant.Name = randomNames[i];
                 UnassignedApplicants.Add(applicant);
             }
+            Applicant app = new Applicant();
+            app.Name = "Hanna Hansson";   // lagt till mitt eget namn.
+            UnassignedApplicants.Add(app);
 
             for (int i = 0; i < 4; i++)
             {

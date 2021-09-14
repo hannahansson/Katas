@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 
 namespace ChuckJokeRadio
 {
@@ -21,7 +22,18 @@ namespace ChuckJokeRadio
 
                 string joke = json.Substring(start, end - start);
                 
+                string startDate = "\"created_at\":\"";
+                int startDateValue = json.IndexOf(startDate) + startDate.Length;
+                int endDateValue = json.IndexOf("\",\"", startDateValue);
+                
+                string dateValue = json.Substring(startDateValue, endDateValue - startDateValue);
+
+                DateTime jokeDate = DateTime.Parse(dateValue);
+
+                
                 Console.WriteLine(joke);
+               // Console.WriteLine("\n This Joke was added : " + date);
+               Console.WriteLine(jokeDate.ToString("yyyy '-' MM '-' dd" +" " + "HH:mm:ss"));
 
                 Console.WriteLine();
                 Console.Write("Press enter for another joke");

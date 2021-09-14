@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 
 namespace OnlineOrderSystem
@@ -54,16 +55,30 @@ namespace OnlineOrderSystem
                 {
                     // TODO lägg till en dictionary itemRecord som har nyckeltyp 'string' och värdetyp 'int'
 
+                    Dictionary<string, int> iteamRecord = new Dictionary<string, int>();
+
                     foreach (var order in orders)
                     {
-                        
+                        Console.WriteLine(order.Name);
+
+                        if (iteamRecord.ContainsKey(order.Name))
+                        {
+                            iteamRecord[order.Name] += 1;
+                        }
+                        else
+                        {
+                            iteamRecord[order.Name] = 1;
+                        }
+                        //lägg till ett för varje gång en dyker upp.
+
                     }
 
-                    //foreach (var record in itemRecord)
+                    foreach (var record in iteamRecord)
                     {
-                        
+                        Console.WriteLine("item:" + record.Key + " amount:" + record.Value);
                     }
                     Console.WriteLine("6: Show amount of each order");
+                    Console.ReadLine();
                 }
                 else if (choice == 7)
                 {
